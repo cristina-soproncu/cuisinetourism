@@ -14,10 +14,39 @@ $form->get('title')->setAttributes([
     'placeholder'=>'Enter post title here'
     ]);
 $form->get('description')->setAttributes([
-    'class'=>'form-control', 
-    'placeholder'=>'Type content here',
+    'class'=>'form-control',
+    'placeholder'=>'Description',
     'rows'=>6
-    ]);
+]);
+$form->get('short_description')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Short Description',
+    'rows'=>3
+]);
+$form->get('binomial_name')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('family')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('genus')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('national_country')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('city')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('bloom_start')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('bloom_end')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('image')->setAttributes([
+    'class'=>'form-control'
+]);
 $form->get('tags')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>'comma, separated, list, of, tags'
