@@ -1,15 +1,12 @@
 <?php
-/**
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
+use Zend\Router\Http\Regex;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Application\Route\StaticRoute;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
     'router' => [
@@ -34,6 +31,20 @@ return [
                     ],
                 ],
             ],
+            'posts' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/posts[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*'
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\PostController::class,
+                        'action'        => 'index',
+                    ],
+                ],
+            ],
             'about' => [
                 'type' => Literal::class,
                 'options' => [
@@ -43,12 +54,13 @@ return [
                         'action'     => 'about',
                     ],
                 ],
-            ],            
+            ],                                    
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+            Controller\PostController::class => Controller\Factory\PostControllerFactory::class,
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit
@@ -66,20 +78,20 @@ return [
         'controllers' => [
             Controller\IndexController::class => [
                 // Allow anyone to visit "index" and "about" actions
-                ['actions' => ['index', 'about'], 'allow' => '*'],
-                // Allow authorized users to visit "settings" action
-                ['actions' => ['settings'], 'allow' => '@']
+                ['actions' => ['index', 'about'], 'allow' => '*']
             ],
         ]
     ],
     'service_manager' => [
         'factories' => [
-            Service\NavManager::class => Service\Factory\NavManagerFactory::class,
+            Service\PostManager::class => Service\Factory\PostManagerFactory::class,
         ],
     ],
+    // The following registers our custom view 
+    // helper classes in view plugin manager.
     'view_helpers' => [
         'factories' => [
-            View\Helper\Menu::class => View\Helper\Factory\MenuFactory::class,
+            View\Helper\Menu::class => InvokableFactory::class,
             View\Helper\Breadcrumbs::class => InvokableFactory::class,
         ],
         'aliases' => [
@@ -103,12 +115,18 @@ return [
             __DIR__ . '/../view',
         ],
     ],
-    // The following key allows to define custom styling for FlashMessenger view helper.
-    'view_helper_config' => [
-        'flashmessenger' => [
-            'message_open_format'      => '<div%s><ul><li>',
-            'message_close_string'     => '</li></ul></div>',
-            'message_separator_string' => '</li><li>'
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
         ]
-    ],   
+    ],
 ];

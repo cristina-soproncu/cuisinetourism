@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Welcome');
+$this->headTitle('Posts');
 
 $this->mainMenu()->setActiveItemId('home');
 
@@ -8,22 +8,67 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h1>Welcome</h1>
+<h1>Posts</h1>
 
-<p>
-    This is the User Demo application powered by Zend Framework 3. It demonstrates
-    how to implement user authentication and how to restrict certain pages to be
-    accessed by unauthorized users.
-</p>
+<div class="row">
+    
+    <div class="col-md-8">
 
-<p>
-    Click the <em>Sign in</em> button at the top right. To sign in, use the 
-    following credentials:
-    <ul>
-        <li>Username: <em>admin@example.com</em></li>
-        <li>Password: <em>Secur1ty</em></li>
-    </ul>    
-</p>
+    <?php foreach($posts as $post): ?>
 
+    <h3>
+        <a href="<?= $this->url('posts', ['action'=>'view', 'id'=>$post->getId()]); ?>">
+            <?= $this->escapeHtml($post->getTitle()); ?>
+        </a>    
+    </h3>
+    
+    <p>
+        Published: <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?> 
+        | Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>   
+    </p>    
+        
+    <p class="comments-header">
+        <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?> | 
+        <a href="<?= $this->url('posts', ['action'=>'view', 'id'=>$post->getId()],
+                ['fragment'=>'comment']); ?>">
+            Add new comment
+        </a>
+    </p>
+
+    <p>    
+        <?= $this->escapeHtml($post->getDescription()); ?>
+    </p>
+
+    <?php endforeach; ?>
+
+    <?= $this->paginationControl($posts,
+                    'Sliding',
+                    'application/partial/paginator', 
+                    array('route' => 'application')); ?>
+    
+    </div>
+    
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Popular Tags</h3>
+            </div>
+            <div class="panel-body">
+                <?php foreach($this->tagCloud as $tagName=>$frequency): ?>
+                
+                <a href="<?= $this->url('application', ['action'=>'index'],
+                    ['query'=>['tag'=>$tagName]]); ?>">                   
+        
+                    <span style="font-size:<?= $this->escapeHtml(0.9+$frequency*3) ?>em">
+                        <?= $this->escapeHtml($tagName); ?>
+                    </span>
+                
+                </a>    
+                    
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
 
 

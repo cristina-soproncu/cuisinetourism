@@ -3,68 +3,88 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use User\Entity\User;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Zend\Paginator\Paginator;
+use Application\Entity\Post;
 
 /**
- * This is the main controller class of the User Demo application. It contains
- * site-wide actions such as Home or About.
+ * This is the main controller class of the Blog application. The 
+ * controller class is used to receive user input,  
+ * pass the data to the models and pass the results returned by models to the 
+ * view for rendering.
  */
 class IndexController extends AbstractActionController 
 {
     /**
      * Entity manager.
-     * @var Doctrine\ORM\EntityManager
+     * @var Doctrine\ORM\EntityManager 
      */
     private $entityManager;
     
     /**
-     * Constructor. Its purpose is to inject dependencies into the controller.
+     * Post manager.
+     * @var Application\Service\PostManager 
      */
-    public function __construct($entityManager) 
+    private $postManager;
+    
+    /**
+     * Constructor is used for injecting dependencies into the controller.
+     */
+    public function __construct($entityManager, $postManager) 
     {
-       $this->entityManager = $entityManager;
+        $this->entityManager = $entityManager;
+        $this->postManager = $postManager;
     }
     
     /**
      * This is the default "index" action of the controller. It displays the 
-     * Home page.
+     * Recent Posts page containing the recent blog posts.
      */
     public function indexAction() 
     {
-        return new ViewModel();
+        $page = $this->params()->fromQuery('page', 1);
+        $tagFilter = $this->params()->fromQuery('tag', null);
+        
+        if ($tagFilter) {
+         
+            // Filter posts by tag
+            $query = $this->entityManager->getRepository(Post::class)
+                    ->findPostsByTag($tagFilter);
+            
+        } else {
+            // Get recent posts
+            $query = $this->entityManager->getRepository(Post::class)
+                    ->findPublishedPosts();
+        }
+        
+        $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(10);        
+        $paginator->setCurrentPageNumber($page);
+                       
+        // Get popular tags.
+        $tagCloud = $this->postManager->getTagCloud();
+        
+        // Render the view template.
+        return new ViewModel([
+            'posts' => $paginator,
+            'postManager' => $this->postManager,
+            'tagCloud' => $tagCloud
+        ]);
     }
-
+    
     /**
-     * This is the "about" action. It is used to display the "About" page.
+     * This action displays the About page.
      */
     public function aboutAction() 
-    {              
-        $appName = 'User Demo';
-        $appDescription = 'This demo shows how to implement user management with Zend Framework 3';
+    {   
+        $appName = 'Blog';
+        $appDescription = 'A simple blog application for the Using Zend Framework 3 book';
         
-        // Return variables to view script with the help of
-        // ViewObject variable container
         return new ViewModel([
             'appName' => $appName,
             'appDescription' => $appDescription
         ]);
-    }  
-    
-    /**
-     * The "settings" action displays the info about currently logged in user.
-     */
-    public function settingsAction()
-    {
-        $user = $this->entityManager->getRepository(User::class)
-                ->findOneByEmail($this->identity());
-        
-        if ($user==null) {
-            throw new \Exception('Not found user with such email');
-        }
-        
-        return new ViewModel([
-            'user' => $user
-        ]);
     }
 }
-

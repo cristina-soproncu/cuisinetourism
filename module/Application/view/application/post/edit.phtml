@@ -1,0 +1,157 @@
+<?php
+$this->headTitle('New Post');
+
+$this->mainMenu()->setActiveItemId('home');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Edit Post'=>$this->url('posts', ['action'=>'edit'])
+            ]);
+
+$form = $this->form;
+$form->get('title')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Enter post title here'
+    ]);
+$form->get('description')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Description',
+    'rows'=>6
+    ]);
+$form->get('short_description')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Short Description',
+    'rows'=>3
+]);
+$form->get('binomial_name')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('family')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('genus')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('national_country')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('city')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('bloom_start')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('bloom_end')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('image')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('tags')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'comma, separated, list, of, tags'
+    ]);
+$form->get('status')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submit')->setValue('Save');
+$form->prepare();
+
+?>
+
+<h1><?= $post->getTitle(); ?></h1>
+
+<p>
+    Please fill out the following form and click the *Save* button.
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('title')); ?>
+            <?= $this->formElement($form->get('title')); ?>
+            <?= $this->formElementErrors($form->get('title')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('description')); ?>
+            <?= $this->formElement($form->get('description')); ?>
+            <?= $this->formElementErrors($form->get('description')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('short_description')); ?>
+            <?= $this->formElement($form->get('short_description')); ?>
+            <?= $this->formElementErrors($form->get('short_description')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('binomial_name')); ?>
+            <?= $this->formElement($form->get('binomial_name')); ?>
+            <?= $this->formElementErrors($form->get('binomial_name')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('family')); ?>
+            <?= $this->formElement($form->get('family')); ?>
+            <?= $this->formElementErrors($form->get('family')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('genus')); ?>
+            <?= $this->formElement($form->get('genus')); ?>
+            <?= $this->formElementErrors($form->get('genus')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('national_country')); ?>
+            <?= $this->formElement($form->get('national_country')); ?>
+            <?= $this->formElementErrors($form->get('national_country')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('city')); ?>
+            <?= $this->formElement($form->get('city')); ?>
+            <?= $this->formElementErrors($form->get('city')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('bloom_start')); ?>
+            <?= $this->formElement($form->get('bloom_start')); ?>
+            <?= $this->formElementErrors($form->get('bloom_start')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('bloom_end')); ?>
+            <?= $this->formElement($form->get('bloom_end')); ?>
+            <?= $this->formElementErrors($form->get('bloom_end')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('image')); ?>
+            <?= $this->formElement($form->get('image')); ?>
+            <?= $this->formElementErrors($form->get('image')); ?>
+            <img id="blah" src="<?= $post->getImage(); ?>" alt="your image" />
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('tags')); ?>
+            <?= $this->formElement($form->get('tags')); ?>
+            <?= $this->formElementErrors($form->get('tags')); ?>                  
+            <p class="help-block">Separate tags with comma.</p>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('status')); ?>
+            <?= $this->formElement($form->get('status')); ?>
+            <?= $this->formElementErrors($form->get('status')); ?>                  
+        </div>
+        
+        <?= $this->formElement($form->get('submit')); ?>
+        
+        <?= $this->form()->closeTag(); ?>
+    </div>    
+</div>   
