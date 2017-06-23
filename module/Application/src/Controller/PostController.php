@@ -62,7 +62,7 @@ class PostController extends AbstractActionController
                 $this->postManager->addNewPost($data);
 
                 // Redirect the user to "index" page.
-                return $this->redirect()->toRoute('application');
+                return $this->redirect()->toRoute('admin');
             }
         }
 
@@ -116,15 +116,22 @@ class PostController extends AbstractActionController
                 $this->postManager->addCommentToPost($post, $data);
 
                 // Redirect the user again to "view" page.
-                return $this->redirect()->toRoute('posts', ['action' => 'view', 'id' => $postId]);
+                return $this->redirect()->toRoute('admin', ['action' => 'view', 'id' => $postId]);
             }
         }
+
+        /* Change layout */
+        $this->layout()->setTemplate('layout/layout-front');
+
+        // Get popular tags.
+        $tagCloud = $this->postManager->getTagCloud();
 
         // Render the view template.
         return new ViewModel([
             'post' => $post,
             'form' => $form,
-            'postManager' => $this->postManager
+            'postManager' => $this->postManager,
+            'tagCloud' => $tagCloud
         ]);
     }
 
@@ -170,20 +177,20 @@ class PostController extends AbstractActionController
                 $this->postManager->updatePost($post, $data);
 
                 // Redirect the user to "admin" page.
-                return $this->redirect()->toRoute('posts', ['action' => 'admin']);
+                return $this->redirect()->toRoute('admin', ['action' => 'index']);
             }
         } else {
             $data = [
                 'title' => $post->getTitle(),
+                'original_title' => $post->getOriginalTitle(),
                 'description' => $post->getDescription(),
                 'short_description' => $post->getShortDescription(),
-                'binomial_name' => $post->getBinomialName(),
-                'family' => $post->getFamily(),
-                'genus' => $post->getGenus(),
-                'national_country' => $post->getNationalCountry(),
+                'video_src' => $post->getVideoSrc(),
+                'cuisine_country' => $post->getCuisineCountry(),
+                'cuisine_type' => $post->getCuisineType(),
+                'recommended_restaurant' => $post->getRecommendedRestaurant(),
+                'restaurant_street' => $post->getRestaurantStreet(),
                 'city' => $post->getCity(),
-                'bloom_start' => $post->getBloomStart(),
-                'bloom_end' => $post->getBloomEnd(),
                 'image' => $post->getImage(),
                 'tags' => $this->postManager->convertTagsToString($post),
                 'status' => $post->getStatus()
@@ -222,7 +229,7 @@ class PostController extends AbstractActionController
         $this->postManager->removePost($post);
 
         // Redirect the user to "admin" page.
-        return $this->redirect()->toRoute('posts', ['action' => 'admin']);
+        return $this->redirect()->toRoute('admin', ['action' => 'index']);
 
     }
 
@@ -230,7 +237,7 @@ class PostController extends AbstractActionController
      * This "admin" action displays the Manage Posts page. This page contains
      * the list of posts with an ability to edit/delete any post.
      */
-    public function adminAction()
+    public function indexAction()
     {
         // Get recent posts
         $posts = $this->entityManager->getRepository(Post::class)

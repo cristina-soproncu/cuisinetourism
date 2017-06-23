@@ -1,46 +1,26 @@
-<?php if ($this->pageCount): ?>
+<?php if ($this->pageCount > 1): ?>
+    <div class="nav-links">
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <a class="previous page-numbers"
+               href="<?php echo $this->url($this->route, [], ['query' => ['page' => $this->previous]]); ?>"><
+                Previous</a>
+        <?php endif; ?>
 
-<nav>
-<ul class="pagination">
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <a class="page-numbers"
+                   href="<?= $this->url($this->route, [], ['query' => ['page' => $page]]); ?>"><?= $this->escapeHtml($page); ?></a>
+            <?php else: ?>
+                <span class="page-numbers current"><?= $this->escapeHtml($page); ?></span>
+            <?php endif; ?>
+        <?php endforeach; ?>
 
-<!-- Previous page link -->
-<?php if (isset($this->previous)): ?>
-    <li>
-      <a href="<?= $this->url($this->route, [], ['query'=>['page'=>$this->previous]]); ?>" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>  
-<?php else: ?>
-    <li>
-        <span aria-hidden="true">&laquo;</span>      
-    </li>  
-<?php endif; ?>
-
-<!-- Numbered page links -->
-<?php foreach ($this->pagesInRange as $page): ?>
-  <?php if ($page != $this->current): ?>
-    <li>
-        <a href="<?= $this->url($this->route, [], ['query'=>['page'=>$page]]); ?>"><?= $this->escapeHtml($page); ?></a>
-    </li>    
-  <?php else: ?>
-    <li>
-        <span aria-hidden="true"><b><?= $this->escapeHtml($page); ?></b></span> 
-    </li>    
-  <?php endif; ?>
-<?php endforeach; ?>
-
-<!-- Next page link -->
-<?php if (isset($this->next)): ?>
-    <li>
-      <a href="<?php echo $this->url($this->route, [], ['query'=>['page'=>$this->next]]); ?>" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>  
-<?php else: ?>
-    <li>
-        <span aria-hidden="true">&raquo;</span>      
-    </li> 
-<?php endif; ?>
-</ul>
-</nav>
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <a class="next page-numbers"
+               href="<?php echo $this->url($this->route, [], ['query' => ['page' => $this->next]]); ?>">Next &gt;</a>
+        <?php endif; ?>
+    </div>
 <?php endif; ?>

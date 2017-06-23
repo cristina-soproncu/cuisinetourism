@@ -1,0 +1,92 @@
+<div class="col-right col-pull">
+    <div class="k-sidebar" data-get-height="content-2" data-break="767">
+
+        <div id="pi_about-2" class="widget widget_about">
+            <div class="img">
+                <img src="/img/sidebar_banner.jpg" alt="The Blooming Trip">
+            </div>
+            <h5>Cuisine Tourism</h5>
+            <div class="social">
+                <a href="https://www.facebook.com/sharer.php?u=<?= $this->serverUrl(true); ?>&amp;t=Cuisine Tourism"
+                   target="_blank" title="Share to Facebook">
+                    <i class="fa fa-facebook" title="Facebook"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?text=Cuisine Tourism-<?= $this->serverUrl(true); ?>&amp;source=webclient"
+                   target="_blank" title="Share to Twitter">
+                    <i class="fa fa-twitter" title="Twitter"></i>
+                </a>
+                <a href="https://pinterest.com/pin/create/button/?url=<?= $this->serverUrl(true); ?>&amp;media=<?= $this->serverUrl(false); ?>/img/sidebar_banner.jpg&amp;description=Cuisine Tourism"
+                   target="_blank" data-pin-do="buttonBookmark" title="Share to Pinterest">
+                    <i class="fa fa-pinterest" title="Pinterest "></i>
+                </a>
+                <a href="/about" data-toggle="tooltip" data-placement="top" title="About..." class="more">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div id="categories-2" class="widget widget_categories">
+            <h4 class="widget-title">Tags</h4>
+            <ul>
+                <?php foreach ($this->tagCloud as $tagName => $frequency): ?>
+                    <li class="cat-item cat-item-10">
+                        <a href="<?= $this->url('application', ['action' => 'index'], ['query' => ['tag' => $tagName]]); ?>"><?= $this->escapeHtml($tagName); ?></a>&nbsp;
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div id="pi_postslisting-2" class="widget postslisting">
+            <h4 class="widget-title">Latest Posts</h4>
+            <ul class="widget_random_post">
+                <li>
+                    <a href="why-i-like-grace\index.html" class="img">
+                        <img width="120" height="80" src="/img/uploads/shutterstock_155219990.jpg"
+                             class="attachment-230x80 size-230x80 wp-post-image" alt="">
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="why-i-like-grace\index.html" data-toggle="tooltip" title="Why I like Grace?">Why I
+                                like Grace?<span><i></i></span></a>
+                        </h4>
+                        <div class="post-meta">
+                            <span><i class="icon-basic-clock"></i>February 22, 2016</span>
+                            <span class="post-views">
+                                <i class="icon-basic-eye"></i>
+                                <a href="why-i-like-grace\index.html">1280 Views</a>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div id="pi_banner-2" class="widget widget_banner">
+            <h4 class="widget-title">Banner</h4>
+            <div class="widgetbanner">
+                <a href="http://themeforest.net/user/wiloke" target="_blank">
+                    <img src="/img/uploads/shutterstock_155219990.jpg" alt="Banner">
+                </a>
+            </div>
+        </div>
+
+        <div id="pi_postslisting-3" class="widget postslisting">
+            <h4 class="widget-title">Popular Posts</h4>
+            <ul class="widget_recent_thumbnail">
+                <li>
+                    <a href="work-sets-you-free\index.html" class="img">
+                        <img width="106" height="89" src="/img/uploads/shutterstock_155219990.jpg"
+                             class="attachment-110x89 size-110x89 wp-post-image" alt="">
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="work-sets-you-free\index.html" data-toggle="tooltip" title="Work sets you free">Work
+                                sets you free</a>
+                        </h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

@@ -1,92 +1,187 @@
 <?php
-$this->headTitle('View Post - ' . $post->getTitle());
+$this->headTitle('View Recipe - ' . $post->getTitle());
 
-$this->mainMenu()->setActiveItemId('home');
-
-$this->pageBreadcrumbs()->setItems([
-            'Home'=>$this->url('home')
-            ]);
-        
-$form = $this->form;
+$form = $this->form->setAttributes([
+    'class' => 'comment-form',
+    'id' => 'commentform',
+    'novalidate' => ''
+]);
 $form->get('author')->setAttributes([
-    'class'=>'form-control', 
-    'placeholder'=>'Author\'s name'
-    ]);
+    'class' => 'comment_field',
+    'placeholder' => 'Your name *',
+    'aria-required' => 'true'
+]);
 $form->get('comment')->setAttributes([
-    'class'=>'form-control',
-    'rows'=>6, 
-    'placeholder'=>'Text'
-    ]);
-$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
-$form->prepare();        
+    'class' => 'comment_field comment_textarea',
+    'cols' => 30,
+    'rows' => 10,
+    'placeholder' => 'Your Comment *',
+    'aria-required' => 'true'
+]);
+$form->get('submit')->setAttributes(['class' => 'submit']);
+$form->prepare();
 ?>
+    <div class="col-left col-push">
+        <div class="k-content" data-set-height="content-2">
+            <div class="blog-standard blog-single">
+                <article class="post">
+                    <div class="post-media recipe-page-media">
+                        <?php if ($post->getVideoSrc() !== NULL) { ?>
+                            <div class="video embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item"
+                                        src="https://www.youtube.com/embed/<?= $post->getVideoSrc(); ?>?title=0&byline=0&portrait=0"
+                                        class="embed-responsive-item"></iframe>
+                            </div>
+                        <?php } else { ?>
+                            <img class="alignnone size-full wp-image-9" src="<?= $post->getImage(); ?>" alt="1">
+                        <?php } ?>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-header">
+                            <h2 class="post-title"><?= $this->escapeHtml($post->getTitle()); ?></h2>
+                            <div class="post-meta">
+                                <span class="post-comments">
+                                    <i class="icon-basic-message-multiple"></i>
+                                    <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?>
+                                </span>
+                                <span class="post-views">
+                                    <i class="icon-basic-eye"></i> 528 Views
+                                </span>
+                            </div>
+                        </div>
+                        <div class="group-box">
+                            <div class="post-content">
+                                <?= $this->escapeHtml($post->getDescription()); ?>
+                                <div class="post-media recipe-page-media">
+                                    <?php if ($post->getVideoSrc() !== NULL) { ?>
+                                        <img class="alignnone size-full wp-image-9" src="<?= $post->getImage(); ?>"
+                                             alt="1">
+                                    <?php } ?>
+                                </div>
+                                <div class="post-meta">
+                                    <span class="post-tag">
+                                        Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="post-footer">
+                                <hr class="hr">
+                                <div class="post-meta">
+                                    <span class="post-date">
+                                    <i class="icon-basic-clock"></i> <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?>
+                                    </span>
+                                </div>
+                                <div class="wiloke-sharing-post-social post-social">
+                                    <a href="https://www.facebook.com/sharer.php?u=<?= $this->serverUrl(true); ?>&amp;t=<?= $this->escapeHtml($post->getTitle()); ?>"
+                                       target="_blank" title="Share to Facebook">
+                                        <i class="fa fa-facebook" title="Facebook"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?text=<?= $this->escapeHtml($post->getTitle()); ?>-<?= $this->serverUrl(true); ?>&amp;source=webclient"
+                                       target="_blank" title="Share to Twitter">
+                                        <i class="fa fa-twitter" title="Twitter"></i>
+                                    </a>
+                                    <a href="https://pinterest.com/pin/create/button/?url=<?= $this->serverUrl(true); ?>&amp;media=<?= $this->serverUrl(false) . $post->getImage(); ?>&amp;description=<?= $this->escapeHtml($post->getTitle()); ?>"
+                                       target="_blank" data-pin-do="buttonBookmark" title="Share to Pinterest">
+                                        <i class="fa fa-pinterest" title="Pinterest "></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+<!--                <div class="k-author-related">-->
+<!--                    <div class="k-author-left">-->
+<!--                        <div class="post-author" data-get-height="related_post" data-break="1199">-->
+<!--                            <h4 class="author-title">-->
+<!--                                <span>About me</span>-->
+<!--                            </h4>-->
+<!--                            <div class="post-author-content">-->
+<!--                                <div class="img">-->
+<!--                                    <img src="http://kratos.wiloke.com/wp-content/uploads/2016/02/1.jpg"-->
+<!--                                         alt="Maria Franklin" style="height: 100%; width: auto; max-width: initial;">-->
+<!--                                </div>-->
+<!--                                <cite>Maria Franklin</cite>-->
+<!--                                <span class="social">-->
+<!--<a target="_blank" href="#"><i class="fa fa-facebook"></i></a>-->
+<!--<a target="_blank" href="#"><i class="fa fa-twitter"></i></a>-->
+<!--<a target="_blank" href="#"><i class="fa fa-dribbble"></i></a>-->
+<!--<a target="_blank" href="#"><i class="fa fa-linkedin"></i></a>-->
+<!--</span>-->
+<!--                                <p>Sed purus eros, porta sed mattis sed, posuere eu elit. Etiam dictum, libero sed-->
+<!--                                    ornare ultrices, nulla dui facilisis orci, ut interdum quam orci congue dui. Vivamus-->
+<!--                                    sagittis volutpat tellus at euismod.</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="post-related" data-set-height="related_post">-->
+<!--                        <h4 class="related-title">-->
+<!--                            <span>Related Posts</span>-->
+<!--                        </h4>-->
+<!--                        <div class="post-related-content">-->
+<!--                            <div class="related-slider">-->
+<!--                                <div class="related-item" style="height: 265px;">-->
+<!--                                    <a href="..\my-portfolio\index.html" class="img">-->
+<!--                                        <img src="--><!--"-->
+<!--                                             class="attachment-kratos-related-posts size-kratos-related-posts wp-post-image"-->
+<!--                                             alt=""> </a>-->
+<!--                                    <div class="caption">-->
+<!--                                        <h2><a href="..\my-portfolio\index.html">My Portfolio</a></h2>-->
+<!--                                        <span class="post-date">-->
+<!--                                            <i class="icon-basic-clock"></i>-->
+<!--                                            <a href="..\my-portfolio\index.html">February 17, 2016 at 10:29 am</a>-->
+<!--                                        </span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                </div>-->
+            </div>
 
-<a href="
-    <?= $this->url('application', ['action'=>'index']); ?>">
-    &lt;&lt; Back to list of posts
-</a>
+            <div class="k-comment">
+                <div class="k-comment-left">
+                    <div id="comments" class="comments">
+                        <div class="comments-inner-wrap">
+                            <h3 class="comments-title"><?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?></h3>
+                            <ol class="commentlist">
+                                <?php foreach ($post->getComments() as $comment): ?>
+                                    <li class="comment byuser comment-author-kratos bypostauthor even thread-even depth-1">
+                                        <div class="avatar">
+                                            <img src="..\wp-content\uploads\2016\02\1.jpg" class="pi-comment-avatar"
+                                                 alt="<?= $this->escapeHtml($comment->getAuthor()) ?>">
+                                        </div>
+                                        <div class="comment-body">
+                                            <cite class="fn text-uppercase"><?= $this->escapeHtml($comment->getAuthor()) ?></cite>
+                                            <span class="comment-meta comment-date"><?= $this->escapeHtml($comment->getDateCreated()); ?></span>
+                                            <p><?= $this->escapeHtml($comment->getContent()); ?></p>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
 
-<h1>
-    <?= $this->escapeHtml($post->getTitle()); ?>    
-</h1>
+                <div class="k-comment-right">
+                    <div id="respond" class="comment-respond">
+                        <h3 id="reply-title" class="comment-reply-title">Leave a comment</h3>
+                        <?= $this->form()->openTag($form); ?>
+                        <div class="form-group">
+                            <?= $this->formElement($form->get('author')); ?>
+                            <?= $this->formElementErrors($form->get('author')); ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->formElement($form->get('comment')); ?>
+                            <?= $this->formElementErrors($form->get('comment')); ?>
+                        </div>
+                        <?= $this->formElement($form->get('submit')); ?>
+                        <?= $this->form()->closeTag(); ?>
+                    </div>
+                </div>
 
-<p class="comments-header">
-    <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?> | 
-    <a href="#comment">
-        Add new comment
-    </a>
-</p>
-
-<p>
-    Published: <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?> 
-    | Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>   
-</p>
-
-<p>    
-    <?= $this->escapeHtml($post->getDescription()); ?>
-</p>
-
-<h3><?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?></h3>
-
-<?php foreach ($post->getComments() as $comment): ?>
-
-<hr>
-
-<p>
-    <?= $this->escapeHtml($comment->getAuthor()) ?> on 
-    <?= $this->escapeHtml($comment->getDateCreated()); ?>
-</p>
-
-<p>
-    <?= $this->escapeHtml($comment->getContent()); ?>    
-</p>
-
-<?php endforeach; ?>
-
-<hr>
-
-<a name="comment"></a>
-<h3>Leave Reply</h3>
-
-<div class="row">
-    <div class="col-md-8">
-        <?= $this->form()->openTag($form); ?>
-        
-        <div class="form-group">
-            <?= $this->formLabel($form->get('author')); ?>
-            <?= $this->formElement($form->get('author')); ?>
-            <?= $this->formElementErrors($form->get('author')); ?>                  
+            </div>
         </div>
-        
-        <div class="form-group">
-            <?= $this->formLabel($form->get('comment')); ?>
-            <?= $this->formElement($form->get('comment')); ?>
-            <?= $this->formElementErrors($form->get('comment')); ?>                  
-        </div>
-        
-        <?= $this->formElement($form->get('submit')); ?>
-        
-        <?= $this->form()->closeTag(); ?>
-    </div>    
-</div>   
-
+    </div>
+<?php echo $this->partial('application/partial/sidebar', ['tagCloud' => $this->tagCloud]); ?>

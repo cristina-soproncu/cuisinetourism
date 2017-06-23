@@ -4,7 +4,7 @@ $this->headTitle('View User');
 $this->mainMenu()->setActiveItemId('users');
 
 $this->pageBreadcrumbs()->setItems([
-            'Home'=>$this->url('home'),
+            'Home'=>$this->url('admin'),
             'Manage Users'=>$this->url('users'),
             'View User'=>$this->url('users', ['action'=>'view', 'id'=>$user->getId()])
             ]);

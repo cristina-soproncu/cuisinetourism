@@ -47,6 +47,18 @@ class PostForm extends Form
                 'label' => 'Title',
             ],
         ]);
+
+        // Add "original_title" field
+        $this->add([
+            'type'  => 'text',
+            'name' => 'original_title',
+            'attributes' => [
+                'id' => 'original_title'
+            ],
+            'options' => [
+                'label' => 'Original Title',
+            ],
+        ]);
         
         // Add "description" field
         $this->add([
@@ -60,51 +72,27 @@ class PostForm extends Form
             ],
         ]);
 
-        // Add "binomial_name" field
+        // Add "cuisine_country" field
         $this->add([
             'type'  => 'text',
-            'name' => 'binomial_name',
+            'name' => 'cuisine_country',
             'attributes' => [
-                'id' => 'binomial_name'
+                'id' => 'cuisine_country'
             ],
             'options' => [
-                'label' => 'Binomial Name',
+                'label' => 'Cuisine Country',
             ],
         ]);
 
-        // Add "family" field
+        // Add "cuisine_type" field
         $this->add([
             'type'  => 'text',
-            'name' => 'family',
+            'name' => 'cuisine_type',
             'attributes' => [
-                'id' => 'family'
+                'id' => 'cuisine_type'
             ],
             'options' => [
-                'label' => 'Family',
-            ],
-        ]);
-
-        // Add "genus" field
-        $this->add([
-            'type'  => 'text',
-            'name' => 'genus',
-            'attributes' => [
-                'id' => 'genus'
-            ],
-            'options' => [
-                'label' => 'Genus',
-            ],
-        ]);
-
-        // Add "national_country" field
-        $this->add([
-            'type'  => 'text',
-            'name' => 'national_country',
-            'attributes' => [
-                'id' => 'national_country'
-            ],
-            'options' => [
-                'label' => 'National Country',
+                'label' => 'Cuisine Type',
             ],
         ]);
 
@@ -117,6 +105,42 @@ class PostForm extends Form
             ],
             'options' => [
                 'label' => 'Recommended City',
+            ],
+        ]);
+
+        // Add "recommended_restaurant" field
+        $this->add([
+            'type'  => 'text',
+            'name' => 'recommended_restaurant',
+            'attributes' => [
+                'id' => 'recommended_restaurant'
+            ],
+            'options' => [
+                'label' => 'Recommended Restaurant',
+            ],
+        ]);
+
+        // Add "restaurant_street" field
+        $this->add([
+            'type'  => 'text',
+            'name' => 'restaurant_street',
+            'attributes' => [
+                'id' => 'restaurant_street'
+            ],
+            'options' => [
+                'label' => 'Restaurant Location',
+            ],
+        ]);
+
+        // Add "video_src" field
+        $this->add([
+            'type'  => 'text',
+            'name' => 'video_src',
+            'attributes' => [
+                'id' => 'video_src'
+            ],
+            'options' => [
+                'label' => 'Youtube ID',
             ],
         ]);
 
@@ -141,58 +165,6 @@ class PostForm extends Form
             ],
             'options' => [
                 'label' => 'Short Description',
-            ],
-        ]);
-
-        // Add "bloom_start" field
-        $this->add([
-            'type'  => 'select',
-            'name' => 'bloom_start',
-            'attributes' => [
-                'id' => 'bloom_start'
-            ],
-            'options' => [
-                'label' => 'Start of blooming',
-                'value_options' => [
-                    1 => 'January',
-                    2 => 'February',
-                    3 => 'March',
-                    4 => 'April',
-                    5 => 'May',
-                    6 => 'June',
-                    7 => 'July',
-                    8 => 'August',
-                    9 => 'September',
-                    10 => 'October',
-                    11 => 'Novemeber',
-                    12 => 'December'
-                ]
-            ],
-        ]);
-
-        // Add "bloom_end" field
-        $this->add([
-            'type'  => 'select',
-            'name' => 'bloom_end',
-            'attributes' => [
-                'id' => 'bloom_end'
-            ],
-            'options' => [
-                'label' => 'End of blooming',
-                'value_options' => [
-                    1 => 'January',
-                    2 => 'February',
-                    3 => 'March',
-                    4 => 'April',
-                    5 => 'May',
-                    6 => 'June',
-                    7 => 'July',
-                    8 => 'August',
-                    9 => 'September',
-                    10 => 'October',
-                    11 => 'Novemeber',
-                    12 => 'December'
-                ]
             ],
         ]);
         
@@ -262,12 +234,30 @@ class PostForm extends Form
                     ],
                 ],
             ]);
+
+        $inputFilter->add([
+            'name'     => 'original_title',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 1024
+                    ],
+                ],
+            ],
+        ]);
         
         $inputFilter->add([
                 'name'     => 'description',
                 'required' => true,
-                'filters'  => [                    
-                    ['name' => 'StripTags'],
+                'filters'  => [
                 ],                
                 'validators' => [
                     [
@@ -298,7 +288,7 @@ class PostForm extends Form
         ]);
 
         $inputFilter->add([
-            'name'     => 'binomial_name',
+            'name'     => 'cuisine_country',
             'required' => false,
             'filters'  => [
                 ['name' => 'StripTags'],
@@ -315,7 +305,7 @@ class PostForm extends Form
         ]);
 
         $inputFilter->add([
-            'name'     => 'family',
+            'name'     => 'cuisine_type',
             'required' => false,
             'filters'  => [
                 ['name' => 'StripTags'],
@@ -332,7 +322,7 @@ class PostForm extends Form
         ]);
 
         $inputFilter->add([
-            'name'     => 'genus',
+            'name'     => 'recommended_restaurant',
             'required' => false,
             'filters'  => [
                 ['name' => 'StripTags'],
@@ -349,7 +339,7 @@ class PostForm extends Form
         ]);
 
         $inputFilter->add([
-            'name'     => 'national_country',
+            'name'     => 'restaurant_street',
             'required' => false,
             'filters'  => [
                 ['name' => 'StripTags'],

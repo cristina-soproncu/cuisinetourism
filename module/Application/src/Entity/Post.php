@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,11 +10,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="\Application\Repository\PostRepository")
  * @ORM\Table(name="post")
  */
-class Post 
+class Post
 {
     // Post status constants.
-    const STATUS_DRAFT       = 1; // Draft.
-    const STATUS_PUBLISHED   = 2; // Published.
+    const STATUS_DRAFT = 1; // Draft.
+    const STATUS_PUBLISHED = 2; // Published.
 
     /**
      * @ORM\Id
@@ -22,10 +23,15 @@ class Post
      */
     protected $id;
 
-    /** 
-     * @ORM\Column(name="title")  
+    /**
+     * @ORM\Column(name="title")
      */
     protected $title;
+
+    /**
+     * @ORM\Column(name="original_title")
+     */
+    protected $originalTitle;
 
     /**
      * @ORM\Column(name="description")
@@ -38,24 +44,19 @@ class Post
     protected $shortDescription;
 
     /**
-     * @ORM\Column(name="binomial_name")
+     * @ORM\Column(name="video_src")
      */
-    protected $binomialName;
+    protected $videoSrc;
 
     /**
-     * @ORM\Column(name="family")
+     * @ORM\Column(name="cuisine_country")
      */
-    protected $family;
+    protected $cuisineCountry;
 
     /**
-     * @ORM\Column(name="genus")
+     * @ORM\Column(name="cuisine_type")
      */
-    protected $genus;
-
-    /**
-     * @ORM\Column(name="national_country")
-     */
-    protected $nationalCountry;
+    protected $cuisineType;
 
     /**
      * @ORM\Column(name="city")
@@ -63,36 +64,36 @@ class Post
     protected $city;
 
     /**
-     * @ORM\Column(name="bloom_start")
+     * @ORM\Column(name="recommended_restaurant")
      */
-    protected $bloomStart	;
+    protected $recommendedRestaurant;
 
     /**
-     * @ORM\Column(name="bloom_end")
+     * @ORM\Column(name="restaurant_street")
      */
-    protected $bloomEnd;
+    protected $restaurantStreet;
 
     /**
      * @ORM\Column(name="image")
      */
     protected $image;
 
-    /** 
-     * @ORM\Column(name="status")  
+    /**
+     * @ORM\Column(name="status")
      */
     protected $status;
 
     /**
-     * @ORM\Column(name="date_created")  
+     * @ORM\Column(name="date_created")
      */
     protected $dateCreated;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="\Application\Entity\Comment", mappedBy="post")
      * @ORM\JoinColumn(name="id", referencedColumnName="post_id")
      */
     protected $comments;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="\Application\Entity\Tag", inversedBy="posts")
      * @ORM\JoinTable(name="post_tag",
@@ -101,21 +102,21 @@ class Post
      *      )
      */
     protected $tags;
-    
+
     /**
      * Constructor.
      */
-    public function __construct() 
+    public function __construct()
     {
-        $this->comments = new ArrayCollection();        
-        $this->tags = new ArrayCollection();        
+        $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
      * Returns ID of this post.
      * @return integer
      */
-    public function getId() 
+    public function getId()
     {
         return $this->id;
     }
@@ -124,7 +125,7 @@ class Post
      * Sets ID of this post.
      * @param int $id
      */
-    public function setId($id) 
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -133,7 +134,7 @@ class Post
      * Returns title.
      * @return string
      */
-    public function getTitle() 
+    public function getTitle()
     {
         return $this->title;
     }
@@ -142,16 +143,34 @@ class Post
      * Sets title.
      * @param string $title
      */
-    public function setTitle($title) 
+    public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * Returns originalTitle.
+     * @return string
+     */
+    public function getOriginalTitle()
+    {
+        return $this->originalTitle;
+    }
+
+    /**
+     * Sets title.
+     * @param string $originalTitle
+     */
+    public function setOriginalTitle($originalTitle)
+    {
+        $this->originalTitle = $originalTitle;
     }
 
     /**
      * Returns status.
      * @return integer
      */
-    public function getStatus() 
+    public function getStatus()
     {
         return $this->status;
     }
@@ -160,19 +179,19 @@ class Post
      * Sets status.
      * @param integer $status
      */
-    public function setStatus($status) 
+    public function setStatus($status)
     {
         $this->status = $status;
-    }   
-    
+    }
+
     /**
      * Returns post description.
      */
     public function getDescription()
     {
-       return $this->description;
+        return $this->description;
     }
-    
+
     /**
      * Sets post description.
      * @param type $description
@@ -201,75 +220,57 @@ class Post
     }
 
     /**
-     * Returns shortDescription.
+     * Returns videoSrc.
      * @return string
      */
-    public function getBinomialName()
+    public function getVideoSrc()
     {
-        return $this->binomialName;
+        return $this->videoSrc;
     }
 
     /**
-     * Sets post binomialName.
-     * @param string $binomialName
+     * Sets post videoSrc.
+     * @param string $videoSrc
      */
-    public function setBinomialName($binomialName)
+    public function setVideoSrc($videoSrc)
     {
-        $this->binomialName = $binomialName;
+        $this->videoSrc = $videoSrc;
     }
 
     /**
-     * Returns family.
+     * Returns cuisineCountry.
      * @return string
      */
-    public function getFamily()
+    public function getCuisineCountry()
     {
-        return $this->family;
+        return $this->cuisineCountry;
     }
 
     /**
-     * Sets post family.
-     * @param string $family
+     * Sets post cuisineCountry.
+     * @param string $cuisineCountry
      */
-    public function setFamily($family)
+    public function setCuisineCountry($cuisineCountry)
     {
-        $this->family = $family;
+        $this->cuisineCountry = $cuisineCountry;
     }
 
     /**
-     * Returns genus.
+     * Returns cuisineType.
      * @return string
      */
-    public function getGenus()
+    public function getCuisineType()
     {
-        return $this->genus;
+        return $this->cuisineType;
     }
 
     /**
-     * Sets post genus.
-     * @param string $genus
+     * Sets post cuisineType.
+     * @param string $cuisineType
      */
-    public function setGenus($genus)
+    public function setCuisineType($cuisineType)
     {
-        $this->genus = $genus;
-    }
-
-    /**
-     * Returns nationalCountry.
-     * @return string
-     */
-    public function getNationalCountry()
-    {
-        return $this->nationalCountry;
-    }
-
-    /**
-     * Sets post nationalCountry.
-     * @param string $nationalCountry
-     */
-    public function setNationalCountry($nationalCountry)
-    {
-        $this->nationalCountry = $nationalCountry;
+        $this->cuisineType = $cuisineType;
     }
 
     /**
@@ -291,39 +292,40 @@ class Post
     }
 
     /**
-     * Returns bloomStart.
-     * @return integer
+     * Returns recommendedRestaurant.
+     * @return string
      */
-    public function getBloomStart()
+    public function getRecommendedRestaurant()
     {
-        return $this->bloomStart;
+        return $this->recommendedRestaurant;
     }
 
     /**
-     * Sets post bloomStart.
-     * @param integer $bloomStart
+     * Sets post recommendedRestaurant.
+     * @param string $recommendedRestaurant
      */
-    public function setBloomStart($bloomStart)
+    public function setRecommendedRestaurant($recommendedRestaurant)
     {
-        $this->bloomStart = $bloomStart;
+        $this->recommendedRestaurant = $recommendedRestaurant;
+    }
+
+
+    /**
+     * Returns restaurantStreet.
+     * @return string
+     */
+    public function getRestaurantStreet()
+    {
+        return $this->restaurantStreet;
     }
 
     /**
-     * Returns bloomEnd.
-     * @return integer
+     * Sets title.
+     * @param string $restaurantStreet
      */
-    public function getBloomEnd()
+    public function setRestaurantStreet($restaurantStreet)
     {
-        return $this->bloomEnd;
-    }
-
-    /**
-     * Sets post bloomEnd.
-     * @param integer $bloomEnd
-     */
-    public function setBloomEnd($bloomEnd)
-    {
-        $this->bloomEnd = $bloomEnd;
+        $this->restaurantStreet = $restaurantStreet;
     }
 
     /**
@@ -343,66 +345,66 @@ class Post
     {
         $this->image = $image;
     }
-    
+
     /**
      * Returns the date when this post was created.
      * @return string
      */
-    public function getDateCreated() 
+    public function getDateCreated()
     {
         return $this->dateCreated;
     }
-    
+
     /**
      * Sets the date when this post was created.
      * @param string $dateCreated
      */
-    public function setDateCreated($dateCreated) 
+    public function setDateCreated($dateCreated)
     {
         $this->dateCreated = $dateCreated;
     }
-    
+
     /**
      * Returns comments for this post.
      * @return array
      */
-    public function getComments() 
+    public function getComments()
     {
         return $this->comments;
     }
-    
+
     /**
      * Adds a new comment to this post.
      * @param $comment
      */
-    public function addComment($comment) 
+    public function addComment($comment)
     {
         $this->comments[] = $comment;
     }
-    
+
     /**
      * Returns tags for this post.
      * @return array
      */
-    public function getTags() 
+    public function getTags()
     {
         return $this->tags;
-    }      
-    
+    }
+
     /**
      * Adds a new tag to this post.
      * @param $tag
      */
-    public function addTag($tag) 
+    public function addTag($tag)
     {
-        $this->tags[] = $tag;        
+        $this->tags[] = $tag;
     }
-    
+
     /**
      * Removes association between this post and the given tag.
      * @param type $tag
      */
-    public function removeTagAssociation($tag) 
+    public function removeTagAssociation($tag)
     {
         $this->tags->removeElement($tag);
     }

@@ -1,74 +1,84 @@
 <?php
 $this->headTitle('Posts');
-
-$this->mainMenu()->setActiveItemId('home');
-
-$this->pageBreadcrumbs()->setItems([
-            'Home'=>$this->url('home')
-            ]);
 ?>
+    <div class="col-left col-push">
+        <div class="k-content" data-set-height="content-2">
+            <div class="blog-grid grid" data-col-lg="3" data-col-md="2" data-col-sm="2" data-col-xs="1"
+                 data-horizontal="20" data-vertical="20">
+                <div class="grid-size"></div>
+                <?php foreach ($posts as $post): ?>
 
-<h1>Posts</h1>
-
-<div class="row">
-    
-    <div class="col-md-8">
-
-    <?php foreach($posts as $post): ?>
-
-    <h3>
-        <a href="<?= $this->url('posts', ['action'=>'view', 'id'=>$post->getId()]); ?>">
-            <?= $this->escapeHtml($post->getTitle()); ?>
-        </a>    
-    </h3>
-    
-    <p>
-        Published: <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?> 
-        | Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>   
-    </p>    
-        
-    <p class="comments-header">
-        <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?> | 
-        <a href="<?= $this->url('posts', ['action'=>'view', 'id'=>$post->getId()],
-                ['fragment'=>'comment']); ?>">
-            Add new comment
-        </a>
-    </p>
-
-    <p>    
-        <?= $this->escapeHtml($post->getDescription()); ?>
-    </p>
-
-    <?php endforeach; ?>
-
-    <?= $this->paginationControl($posts,
-                    'Sliding',
-                    'application/partial/paginator', 
-                    array('route' => 'application')); ?>
-    
-    </div>
-    
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Popular Tags</h3>
-            </div>
-            <div class="panel-body">
-                <?php foreach($this->tagCloud as $tagName=>$frequency): ?>
-                
-                <a href="<?= $this->url('application', ['action'=>'index'],
-                    ['query'=>['tag'=>$tagName]]); ?>">                   
-        
-                    <span style="font-size:<?= $this->escapeHtml(0.9+$frequency*3) ?>em">
-                        <?= $this->escapeHtml($tagName); ?>
-                    </span>
-                
-                </a>    
-                    
+                    <div class="grid-item">
+                        <div class="post type-post status-publish format-standard has-post-thumbnail hentry category-food tag-discover tag-explore tag-quotes tag-travel">
+                            <div class="post-media">
+                                <div class="img" data-set-height="post-176">
+                                    <?php if ($post->getVideoSrc() !== NULL) { ?>
+                                        <a href="https://www.youtube.com/watch?v=<?= $post->getVideoSrc(); ?>" class="pi-magnific-iframe icon-format">
+                                            <i class="icon-music-play-button"></i>
+                                        </a>
+                                    <?php } ?>
+                                    <a href="/recipe/<?= $post->getId(); ?>">
+                                        <img width="525" height="350" src="<?= $post->getImage(); ?>"
+                                             class="attachment-525x515 size-525x515 wp-post-image" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-header">
+                                    <h2 class="post-title">
+                                        <a href="/recipe/<?= $post->getId(); ?>">
+                                            <?= $this->escapeHtml($post->getTitle()); ?>
+                                        </a>
+                                    </h2>
+                                    <div class="post-meta">
+                                        <span class="post-comments">
+                                            <i class="icon-basic-message-multiple"></i> <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?>
+                                        </span>
+                                        <span class="post-views">
+                                            <i class="icon-basic-eye"></i> 2 Views
+                                        </span>
+                                        <span class="more-excerpt" data-toggle="tooltip" title="Excerpt More">
+                                            <i class="fa fa-angle-down"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="group-box">
+                                    <div class="post-content">
+                                        <p><?= $this->escapeHtml($post->getShortDescription()); ?></p>
+                                        <a href="/recipe/<?= $post->getId(); ?>"
+                                           class="more">Continue reading</a>
+                                    </div>
+                                    <div class="post-footer">
+                                        <hr class="hr">
+                                        <div class="post-meta">
+                                           <span>
+                                                <i class="icon-basic-geolocalize-01"></i>
+                                                Type: <?= $post->getCuisineType(); ?>
+                                            </span>
+                                            <span>
+                                                <i class="icon-basic-geolocalize-01"></i>
+                                                Country: <?= $post->getCuisineCountry(); ?>
+                                            </span>
+                                            <span>
+                                                <i class="icon-basic-geolocalize-01"></i>
+                                                Location: <?= $post->getCity(); ?>, <?= $post->getRecommendedRestaurant(); ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
+
+            <nav class="navigation pagination" role="navigation">
+                <?= $this->paginationControl($posts,
+                    'Sliding',
+                    'application/partial/paginator',
+                    array('route' => 'application')); ?>
+            </nav>
+
         </div>
     </div>
-</div>
-
-
+<?php echo $this->partial('application/partial/sidebar', ['tagCloud' => $this->tagCloud]); ?>

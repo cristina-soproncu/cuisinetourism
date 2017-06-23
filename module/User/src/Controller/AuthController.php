@@ -60,6 +60,10 @@ class AuthController extends AbstractActionController
         if (strlen($redirectUrl)>2048) {
             throw new \Exception("Too long redirectUrl argument passed");
         }
+
+        if($redirectUrl == '') {
+            $redirectUrl = '/admin';
+        }
         
         // Check if we do not have users in database at all. If so, create 
         // the 'Admin' user.
@@ -107,7 +111,7 @@ class AuthController extends AbstractActionController
                     // If redirect URL is provided, redirect the user to that URL;
                     // otherwise redirect to Home page.
                     if(empty($redirectUrl)) {
-                        return $this->redirect()->toRoute('home');
+                        return $this->redirect()->toRoute('admin');
                     } else {
                         $this->redirect()->toUrl($redirectUrl);
                     }
@@ -130,9 +134,8 @@ class AuthController extends AbstractActionController
      * The "logout" action performs logout operation.
      */
     public function logoutAction() 
-    {        
+    {
         $this->authManager->logout();
-        
-        return $this->redirect()->toRoute('login');
+        return $this->redirect()->toRoute('index');
     }
 }

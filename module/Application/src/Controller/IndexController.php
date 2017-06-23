@@ -60,11 +60,14 @@ class IndexController extends AbstractActionController
         
         $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
         $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(10);        
+        $paginator->setDefaultItemCountPerPage(15);
         $paginator->setCurrentPageNumber($page);
                        
         // Get popular tags.
         $tagCloud = $this->postManager->getTagCloud();
+
+        /* Change layout */
+        $this->layout()->setTemplate('layout/layout-front');
         
         // Render the view template.
         return new ViewModel([
@@ -79,12 +82,19 @@ class IndexController extends AbstractActionController
      */
     public function aboutAction() 
     {   
-        $appName = 'Blog';
-        $appDescription = 'A simple blog application for the Using Zend Framework 3 book';
+        $appName = 'Cuisine Tourism';
+        $appDescription = 'Cuisine Tourism Website';
+
+        /* Change layout */
+        $this->layout()->setTemplate('layout/layout-front');
+
+        // Get popular tags.
+        $tagCloud = $this->postManager->getTagCloud();
         
         return new ViewModel([
             'appName' => $appName,
-            'appDescription' => $appDescription
+            'appDescription' => $appDescription,
+            'tagCloud' => $tagCloud
         ]);
     }
 }

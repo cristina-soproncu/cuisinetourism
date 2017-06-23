@@ -1,11 +1,11 @@
 <?php
 $this->headTitle('New Post');
 
-$this->mainMenu()->setActiveItemId('home');
+$this->mainMenu()->setActiveItemId('posts');
 
 $this->pageBreadcrumbs()->setItems([
-            'Home'=>$this->url('home'),
-            'Add Post'=>$this->url('posts', ['action'=>'add'])
+            'Home'=>$this->url('admin'),
+            'Add Post'=>$this->url('admin', ['action'=>'add'])
             ]);
 
 $form = $this->form;
@@ -13,6 +13,10 @@ $form->get('title')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>'Enter post title here'
     ]);
+$form->get('original_title')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Enter original title here'
+]);
 $form->get('description')->setAttributes([
     'class'=>'form-control',
     'placeholder'=>'Description',
@@ -23,25 +27,22 @@ $form->get('short_description')->setAttributes([
     'placeholder'=>'Short Description',
     'rows'=>3
 ]);
-$form->get('binomial_name')->setAttributes([
+$form->get('video_src')->setAttributes([
     'class'=>'form-control'
 ]);
-$form->get('family')->setAttributes([
+$form->get('cuisine_country')->setAttributes([
     'class'=>'form-control'
 ]);
-$form->get('genus')->setAttributes([
+$form->get('cuisine_type')->setAttributes([
     'class'=>'form-control'
 ]);
-$form->get('national_country')->setAttributes([
+$form->get('recommended_restaurant')->setAttributes([
+    'class'=>'form-control'
+]);
+$form->get('restaurant_street')->setAttributes([
     'class'=>'form-control'
 ]);
 $form->get('city')->setAttributes([
-    'class'=>'form-control'
-]);
-$form->get('bloom_start')->setAttributes([
-    'class'=>'form-control'
-]);
-$form->get('bloom_end')->setAttributes([
     'class'=>'form-control'
 ]);
 $form->get('image')->setAttributes([
@@ -74,6 +75,12 @@ $form->prepare();
             <?= $this->formElement($form->get('title')); ?>
             <?= $this->formElementErrors($form->get('title')); ?>                  
         </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('original_title')); ?>
+            <?= $this->formElement($form->get('original_title')); ?>
+            <?= $this->formElementErrors($form->get('original_title')); ?>
+        </div>
         
         <div class="form-group">
             <?= $this->formLabel($form->get('description')); ?>
@@ -88,45 +95,39 @@ $form->prepare();
         </div>
 
         <div class="form-group">
-            <?= $this->formLabel($form->get('binomial_name')); ?>
-            <?= $this->formElement($form->get('binomial_name')); ?>
-            <?= $this->formElementErrors($form->get('binomial_name')); ?>
+            <?= $this->formLabel($form->get('video_src')); ?>
+            <?= $this->formElement($form->get('video_src')); ?>
+            <?= $this->formElementErrors($form->get('video_src')); ?>
         </div>
 
         <div class="form-group">
-            <?= $this->formLabel($form->get('family')); ?>
-            <?= $this->formElement($form->get('family')); ?>
-            <?= $this->formElementErrors($form->get('family')); ?>
+            <?= $this->formLabel($form->get('cuisine_country')); ?>
+            <?= $this->formElement($form->get('cuisine_country')); ?>
+            <?= $this->formElementErrors($form->get('cuisine_country')); ?>
         </div>
 
         <div class="form-group">
-            <?= $this->formLabel($form->get('genus')); ?>
-            <?= $this->formElement($form->get('genus')); ?>
-            <?= $this->formElementErrors($form->get('genus')); ?>
+            <?= $this->formLabel($form->get('cuisine_type')); ?>
+            <?= $this->formElement($form->get('cuisine_type')); ?>
+            <?= $this->formElementErrors($form->get('cuisine_type')); ?>
         </div>
 
         <div class="form-group">
-            <?= $this->formLabel($form->get('national_country')); ?>
-            <?= $this->formElement($form->get('national_country')); ?>
-            <?= $this->formElementErrors($form->get('national_country')); ?>
+            <?= $this->formLabel($form->get('recommended_restaurant')); ?>
+            <?= $this->formElement($form->get('recommended_restaurant')); ?>
+            <?= $this->formElementErrors($form->get('recommended_restaurant')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('restaurant_street')); ?>
+            <?= $this->formElement($form->get('restaurant_street')); ?>
+            <?= $this->formElementErrors($form->get('restaurant_street')); ?>
         </div>
 
         <div class="form-group">
             <?= $this->formLabel($form->get('city')); ?>
             <?= $this->formElement($form->get('city')); ?>
             <?= $this->formElementErrors($form->get('city')); ?>
-        </div>
-
-        <div class="form-group">
-            <?= $this->formLabel($form->get('bloom_start')); ?>
-            <?= $this->formElement($form->get('bloom_start')); ?>
-            <?= $this->formElementErrors($form->get('bloom_start')); ?>
-        </div>
-
-        <div class="form-group">
-            <?= $this->formLabel($form->get('bloom_end')); ?>
-            <?= $this->formElement($form->get('bloom_end')); ?>
-            <?= $this->formElementErrors($form->get('bloom_end')); ?>
         </div>
 
         <div class="form-group">

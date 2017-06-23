@@ -1,0 +1,146 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('Blog')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+        ->appendStylesheet($this->basePath('css/wiloke-gallery.css'))
+        ->appendStylesheet($this->basePath('css/photoswipe.css'))
+        ->appendStylesheet($this->basePath('css/default-skin/default-skin.css'))
+        ->appendStylesheet($this->basePath('css/justifiedGallery.min.css'))
+        ->appendStylesheet($this->basePath('css/magnific-popup.css'))
+        ->appendStylesheet($this->basePath('css/owl.transitions.css'))
+        ->appendStylesheet($this->basePath('css/owl.carousel.css'))
+        ->appendStylesheet($this->basePath('css/font-awesome.min.css'))
+        ->appendStylesheet($this->basePath('css/font-linea.css'))
+        ->appendStylesheet($this->basePath('css/kratos.css'))
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript()
+        ->appendFile($this->basePath('js/jquery.js'))
+        ->appendFile($this->basePath('js/jquery-migrate.min.js'))
+        ->appendFile($this->basePath('js/photoswipe-ui-default.min.js'))
+        ->appendFile($this->basePath('js/photoswipe.min.js'))
+        ->appendFile($this->basePath('js/jquery.justifiedGallery.min.js'))
+        ->appendFile($this->basePath('js/jquery.magnific-popup.min.js'))
+        ->appendFile($this->basePath('js/jflickrfeed.min.js'))
+        ->appendFile($this->basePath('js/owl.carousel.min.js'))
+        ->appendFile($this->basePath('js/wiloke-gallery.js'))
+        ->appendFile($this->basePath('js/wiloke-post-format-ui.js'))
+        ->appendFile($this->basePath('js/jquery-ui.min.js'))
+        ->appendFile($this->basePath('js/tooltip.js'))
+        ->appendFile($this->basePath('js/imagesloaded.min.js'))
+        ->appendFile($this->basePath('js/masonry.min.js'))
+        ->appendFile($this->basePath('js/sidebar-sticky.js'))
+        ->appendFile($this->basePath('js/retina.min.js'))
+        ->appendFile($this->basePath('js/script.js'))
+        ->appendFile($this->basePath('js/kratos_custom.js'))
+    ?>
+</head>
+<body id="home blog" style="font-size: 15px; transform: none;">
+<div id="page-wrap">
+
+    <header id="k-header" class="k-sticky">
+        <div class="k-icon-logo">
+            <a href="/">
+                <img src="<?php echo $this->basePath('img/logo.png'); ?>" alt="Cuisine Tourism">
+            </a>
+        </div>
+
+        <div class="k-bar">
+            <span class="k-icon-bar">
+                <span></span>
+            </span>
+            <div class="k-bar-widget">
+                <div id="pi_widget_search-2" class="widget widget_search">
+                    <form method="get" action="http://kratos.wiloke.com/">
+                        <input type="search" name="s" class="search_field" placeholder="Search..." value="">
+                        <button type="submit" class="submit_field"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div id="pi_about-3" class="widget widget_about">
+                    <div class="img">
+                        <img src="/img/admin.jpg" alt="Soproncu Cristina">
+                    </div>
+                    <h5>Soproncu Cristina</h5>
+                    <p style="color:#757575">Licenta 2017<br/><br/>Tehnici de programare PHP utilizand framework-ul Zend [ZF3]</p>
+                    <div class="social">
+                        <span  style="color:#fff">Admin Area</span>
+                        <a href="/admin" data-toggle="tooltip" data-placement="top" title="Admin" class="more">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span class="k-bar-menu"><span></span></span>
+
+        <nav class="k-navigation">
+            <div class="search-mobile">
+                <form method="get" action="http://kratos.wiloke.com/">
+                    <input type="search" name="s" class="search_field" placeholder="Search..." value="">
+                    <button type="submit" class="submit_field"><i class="icon-basic-magnifier"></i></button>
+                </form>
+            </div>
+            <ul id="menu-kratos" class="kratos-menu">
+                <li id="menu-item-34"
+                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                    <a href="/">Home</a>
+                </li>
+                <li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page">
+                    <a href="/about">About</a>
+                </li>
+                <li id="menu-item-48" class="menu-item menu-item-type-custom menu-item-object-custom">
+                    <a href="#search">Search</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="main">
+        <div class="row">
+            <!-- Page content placeholder -->
+            <?= $this->content; ?>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <ul class="k-follow-me">
+            <li>Share</li>
+            <li data-toggle="tooltip" title="Facebook">
+                <a href="https://www.facebook.com/sharer.php?u=<?= $this->serverUrl(true); ?>&amp;t=Cuisine Tourism"
+                   target="_blank" title="Share to Facebook">
+                    <i class="fa fa-facebook" title="Facebook"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" title="Twitter">
+                <a href="https://twitter.com/intent/tweet?text=Cuisine Tourism-<?= $this->serverUrl(true); ?>&amp;source=webclient"
+                   target="_blank" title="Share to Twitter">
+                    <i class="fa fa-twitter" title="Twitter"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" title="Pinterest">
+                <a href="https://pinterest.com/pin/create/button/?url=<?= $this->serverUrl(true); ?>&amp;media=<?= $this->serverUrl(false); ?>/img/sidebar_banner.jpg&amp;description=Cuisine Tourism"
+                   target="_blank" data-pin-do="buttonBookmark" title="Share to Pinterest">
+                    <i class="fa fa-pinterest" title="Pinterest "></i>
+                </a>
+            </li>
+        </ul>
+        <p>Licenta ©2017 Soproncu Cristina</p>
+        <span class="scroll-top">Top</span>
+    </footer>
+
+</div>
+
+</body>
+</html>

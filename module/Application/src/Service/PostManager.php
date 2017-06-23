@@ -35,15 +35,15 @@ class PostManager
         // Create new Post entity.
         $post = new Post();
         $post->setTitle($data['title']);
+        $post->setOriginalTitle($data['original_title']);
         $post->setDescription($data['description']);
         $post->setShortDescription($data['short_description']);
-        $post->setBinomialName($data['binomial_name']);
-        $post->setFamily($data['family']);
-        $post->setGenus($data['genus']);
-        $post->setNationalCountry($data['national_country']);
+        $post->setVideoSrc($data['video_src']);
+        $post->setCuisineCountry($data['cuisine_country']);
+        $post->setCuisineType($data['cuisine_type']);
+        $post->setRecommendedRestaurant($data['recommended_restaurant']);
+        $post->setRestaurantStreet($data['restaurant_street']);
         $post->setCity($data['city']);
-        $post->setBloomStart($data['bloom_start']);
-        $post->setBloomEnd($data['bloom_end']);
         $post->setStatus($data['status']);
         $currentDate = date('Y-m-d H:i:s');
         $post->setDateCreated($currentDate);
@@ -73,15 +73,15 @@ class PostManager
     public function updatePost($post, $data) 
     {
         $post->setTitle($data['title']);
+        $post->setOriginalTitle($data['original_title']);
         $post->setDescription($data['description']);
         $post->setShortDescription($data['short_description']);
-        $post->setBinomialName($data['binomial_name']);
-        $post->setFamily($data['family']);
-        $post->setGenus($data['genus']);
-        $post->setNationalCountry($data['national_country']);
+        $post->setVideoSrc($data['video_src']);
+        $post->setCuisineCountry($data['cuisine_country']);
+        $post->setCuisineType($data['cuisine_type']);
+        $post->setRestaurantStreet($data['restaurant_street']);
+        $post->setRecommendedRestaurant($data['recommended_restaurant']);
         $post->setCity($data['city']);
-        $post->setBloomStart($data['bloom_start']);
-        $post->setBloomEnd($data['bloom_end']);
         $post->setStatus($data['status']);
 
         /* Upload image */
