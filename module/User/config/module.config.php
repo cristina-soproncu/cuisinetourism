@@ -81,6 +81,9 @@ return [
                 // Give access to "index", "add", "edit", "view", "changePassword" actions to authorized users only.
                 ['actions' => ['index', 'add', 'edit', 'view', 'changePassword'], 'allow' => '@']
             ],
+            Controller\AuthController::class => [
+                ['actions' => ['login', 'logout'], 'allow' => '*'],
+            ]
         ]
     ],
     'service_manager' => [

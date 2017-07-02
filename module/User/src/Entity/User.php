@@ -21,8 +21,8 @@ class User
      */
     protected $id;
 
-    /** 
-     * @ORM\Column(name="email")  
+    /**
+     * @ORM\Column(name="email")
      */
     protected $email;
     

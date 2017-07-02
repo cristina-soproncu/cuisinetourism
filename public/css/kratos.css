@@ -16,7 +16,7 @@
 }
 
 .c-hover, blockquote cite a:hover, .pagination .nav-links a:hover, .pagination .nav-links .dots:hover, .widget_about .social a:hover, .widget_random_post li .caption h4:hover, .widget_random_post li.active .caption h4 a, .pi_follow .pi-social-square a:hover, .widget_recent_thumbnail li h4:hover, .widget_calendar table a, .widget_archive ul li a:hover, .widget_meta ul li a:hover, .widget_recent_comments ul li a:hover, .widget_recent_entries ul li a:hover, .widget_rss ul li a:hover, .widget_nav_menu ul li a:hover, .widget_categories ul li a:hover, .widget_pages ul li a:hover, .widget_archive ul li cite, .widget_meta ul li cite, .widget_recent_comments ul li cite, .widget_recent_entries ul li cite, .widget_rss ul li cite, .widget_nav_menu ul li cite, .widget_categories ul li cite, .widget_pages ul li cite, .tagcloud a:hover, .calendar_wrap table a, .k-sidebar .widget_categories ul li a:hover, .k-sidebar .widget_categories ul li.current-cat > a, .k-bar-widget .widget_about .social a:hover, .k-bar-widget .widget_archive ul li a:hover, .k-bar-widget .widget_meta ul li a:hover, .k-bar-widget .widget_recent_comments ul li a:hover, .k-bar-widget .widget_recent_entries ul li a:hover, .k-bar-widget .widget_rss ul li a:hover, .k-bar-widget .widget_nav_menu ul li a:hover, .k-bar-widget .widget_categories ul li a:hover, .k-bar-widget .widget_pages ul li a:hover, #k-header .k-icon-font .active, .k-navigation .kratos-menu li:hover > a, .k-navigation .kratos-menu li.current-menu-item > a, .k-navigation .kratos-menu li.current-menu-parent > a, .k-navigation .kratos-menu li .sub-menu li:hover > a, .k-navigation .kratos-menu li .sub-menu li.current-menu-item > a, .k-navigation .kratos-menu li .sub-menu li.current-menu-parent > a, .post-author-content a, .post-author-content cite a:hover, .post-author-content .social a:hover, .related-item .caption h2:hover, .related-item .caption .post-date a:hover, .post-featured .post-body .post-meta a:hover, .post-featured .post-body .post-title a:hover, .post-featured .post-body .post-content .more, .post .post-media blockquote cite a:hover, .post .post-media .post-link .name a:hover, .post .post-media .post-link .link, .post .post-title a:hover, .post .post-meta a:hover, .post .post-social a:hover, .post .more:hover, .blog-grid .post .img .icon-format:hover, .blog-grid .post .post-slider .icon-format:hover, .blog-masonry .post .img .icon-format:hover, .blog-masonry .post .post-slider .icon-format:hover, .blog-grid .post .post-media .post-link .link:hover, .blog-grid .post .post-content .more, .blog-grid-large .post .post-media .img .icon-format:hover, .blog-grid-large .post .post-content .more, .blog-list .post .post-media .icon-format:hover, .blog-list .post.format-quote .post-media .post-quote blockquote:before, .blog-single .post-content a, .blog-single .post-content .post-meta .post-tag a:hover, .instagram-popup .instagram-popup-info .instagram-info-header cite, .instagram-popup .instagram-popup-info .instagram-info-header .original, .instagram-popup .instagram-popup-info .instagram-info-comment li a, .commentlist li .comment-body cite a:hover, .commentlist li .comment-body .comment-edit-reply a:hover, .k-follow-me li a:hover, #footer .scroll-top:hover {
-    color: #54ccd0;
+    color: #3e979a;
 }
 
 .c-box, .k-sidebar .widget_mailchimp .widgetmailchimp, .k-sidebar .widget_mailchimp .widgetmailchimp .mail_field, .k-bar-widget, .k-bar-widget .widget_search .search_field, .k-bar-widget .widget_search .submit_field, .k-bar-widget .widget_about p, .k-bar-widget .widget_archive ul li a, .k-bar-widget .widget_meta ul li a, .k-bar-widget .widget_recent_comments ul li a, .k-bar-widget .widget_recent_entries ul li a, .k-bar-widget .widget_rss ul li a, .k-bar-widget .widget_nav_menu ul li a, .k-bar-widget .widget_categories ul li a, .k-bar-widget .widget_pages ul li a, .k-navigation-mobile .search-mobile .search_field, .k-navigation-mobile .search-mobile .submit_field, .k-navigation-mobile .kratos-menu li a, .contact-form .wpcf7-text, .contact-form .wpcf7-textarea, .post .wiloke-alert, .blog-grid .post .post-header .post-meta, .blog-masonry .post .post-header .post-meta, .blog-list .post .post-header .post-meta, .blog-list .post .post-footer .post-meta, .blog-list .post.format-quote:hover .post-media .post-quote blockquote p, .blog-list .post:hover .post-meta i, .blog-list .post:hover .post-content, .blog-list .post:hover .post-content .more, .comment-respond, .comment-respond .form-login-logout a, .comment-respond .comment_field {
@@ -41,11 +41,11 @@
 }
 
 .bg-hover, .owl-prev:hover, .owl-next:hover, .widget_about .social .more:hover, .widget_random_post li .caption h4 span:hover i, .widget_random_post li.active .caption h4 span i, .widget_calendar table a:hover, .calendar_wrap table a:hover, .k-bar-menu:hover span, .k-bar-menu.active span, .k-bar-menu.active span:before, .k-bar-menu.active span:after, .k-bar .k-icon-bar:hover span, .k-bar.active .k-icon-bar span, .contact-form .wpcf7-submit:hover, .featured-slider .owl-prev:hover, .featured-slider .owl-next:hover, .post .post-media .post-link .link span:after, .blog-grid .post.k-active .post-header .post-meta .more-excerpt, .blog-grid .post .post-media .post-link .link:hover span:after, .blog-grid .post .post-header .post-meta .more-excerpt:hover, .gallery-instagram .instagram-item .instagram-inner:before {
-    background-color: #54ccd0;
+    background-color: #3e979a;
 }
 
 .b-color-hover, .preloader .group:after, .scroll-loadmore a:after, .widget_about .social .more:hover, .pi_follow .pi-social-square a:hover, .k-bar-widget .widget_about .social .more:hover, .blog-grid .post.k-active .post-header .post-meta .more-excerpt, .blog-grid .post .post-header .post-meta .more-excerpt:hover, .instagram-popup .instagram-popup-info .instagram-info-header .original, #footer .scroll-top:hover {
-    border-color: #54ccd0;
+    border-color: #3e979a;
 }
 
 *, :after, :before {
@@ -913,7 +913,6 @@ blockquote cite a {
     text-align: center;
     line-height: 23px;
     margin: 0;
-    padding: 0;
     border: 1px solid #232628;
 }
 
@@ -6329,7 +6328,7 @@ blockquote cite a {
 .k-sidebar .widget_about h5 {
     margin-top: -10px;
     padding-bottom: 15px;
-    background: #171518;
+    background: #181419;
 }
 
 .recipe-page-media img {
@@ -6337,4 +6336,19 @@ blockquote cite a {
     margin-bottom: 15px;
     max-width: 500px;
     width: 100%;
+}
+
+.blog-single .post-body .post-content .post-meta .post-tag a {
+    font-size: 16px;
+}
+
+.post-author .recipe-image {
+    background-size: cover;
+    width: 100%;
+    height: 240px;
+    background-position: center center;
+}
+
+.grid-item .post-body .post-title a:hover {
+    color: #cecece;
 }

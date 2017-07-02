@@ -22,8 +22,8 @@ class Comment
      */
     protected $content;
 
-    /** 
-     * @ORM\Column(name="author")  
+    /**
+     * @ORM\Column(name="author")
      */
     protected $author;
     

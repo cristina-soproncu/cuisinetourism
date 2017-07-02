@@ -7,7 +7,6 @@ $this->headTitle('Posts');
                  data-horizontal="20" data-vertical="20">
                 <div class="grid-size"></div>
                 <?php foreach ($posts as $post): ?>
-
                     <div class="grid-item">
                         <div class="post type-post status-publish format-standard has-post-thumbnail hentry category-food tag-discover tag-explore tag-quotes tag-travel">
                             <div class="post-media">
@@ -20,7 +19,7 @@ $this->headTitle('Posts');
                                     <?php } ?>
                                     <a href="/recipe/<?= $post->getId(); ?>">
                                         <img width="525" height="350" src="<?= $post->getImage(); ?>"
-                                             class="wp-post-image" alt="">
+                                             class="attachment-525x515 size-525x515 wp-post-image" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -53,16 +52,17 @@ $this->headTitle('Posts');
                                         <hr class="hr">
                                         <div class="post-meta">
                                            <span>
-                                                <i class="icon-ecommerce-bag-check"></i>
+                                                <i class="icon-basic-geolocalize-01"></i>
                                                 Type: <?= $post->getCuisineType(); ?>
                                             </span>
                                             <span>
-                                                <i class="icon-basic-flag1"></i>
+                                                <i class="icon-basic-geolocalize-01"></i>
                                                 Country: <?= $post->getCuisineCountry(); ?>
                                             </span>
                                             <span>
                                                 <i class="icon-basic-geolocalize-01"></i>
-                                                Location: <?= $post->getCity(); ?>, <?= $post->getRecommendedRestaurant(); ?>
+                                                Location: <?= $post->getCity(); ?>
+                                                , <?= $post->getRecommendedRestaurant(); ?>
                                             </span>
                                         </div>
                                     </div>

@@ -66,4 +66,8 @@ $this->headTitle('About');
             </div>
         </div>
     </div>
-<?php echo $this->partial('application/partial/sidebar', ['tagCloud' => $this->tagCloud]); ?>
+<?php echo $this->partial('application/partial/sidebar', [
+    'countries' => $this->countries,
+    'types' => $this->types,
+    'latestPosts' => $this->latestPosts
+]); ?>

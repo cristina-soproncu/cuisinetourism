@@ -32,20 +32,6 @@ return [
                     ],
                 ],
             ],
-            'admin' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route' => '/admin[/:action[/:id]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[0-9]*'
-                    ],
-                    'defaults' => [
-                        'controller' => Controller\PostController::class,
-                        'action' => 'index',
-                    ],
-                ],
-            ],
             'about' => [
                 'type' => Literal::class,
                 'options' => [
@@ -69,6 +55,69 @@ return [
                     ],
                 ],
             ],
+            'tagsfilter' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/recipes/tag[/:tag]',
+                    'constraints' => [
+                        'tag' => '[a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'tagsfilter',
+                    ],
+                ],
+            ],
+            'countryfilter' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/recipes/country[/:country]',
+                    'constraints' => [
+                        'tag' => '[a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'countryfilter',
+                    ],
+                ],
+            ],
+            'typefilter' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/recipes/type[/:type]',
+                    'constraints' => [
+                        'tag' => '[a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'typefilter',
+                    ],
+                ],
+            ],
+            'search' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/recipes/search',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'search',
+                    ],
+                ],
+            ],
+            'admin' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*'
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\PostController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -81,17 +130,11 @@ return [
     // access to certain controller actions for unauthorized visitors.
     'access_filter' => [
         'options' => [
-            // The access filter can work in 'restrictive' (recommended) or 'permissive'
-            // mode. In restrictive mode all controller actions must be explicitly listed
-            // under the 'access_filter' config key, and access is denied to any not listed 
-            // action for not logged in users. In permissive mode, if an action is not listed 
-            // under the 'access_filter' key, access to it is permitted to anyone (even for 
-            // not logged in users. Restrictive mode is more secure and recommended to use.
             'mode' => 'restrictive'
         ],
         'controllers' => [
             Controller\IndexController::class => [
-                ['actions' => ['index', 'about'], 'allow' => '*']
+                ['actions' => ['index', 'about', 'tagsfilter', 'countryfilter', 'typefilter', 'search'], 'allow' => '*']
             ],
             Controller\PostController::class => [
                 ['actions' => ['view'], 'allow' => '*']

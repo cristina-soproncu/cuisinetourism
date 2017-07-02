@@ -45,22 +45,16 @@ $form->prepare();
                                     <?= $this->escapeHtml($postManager->getCommentCountStr($post)); ?>
                                 </span>
                                 <span class="post-views">
-                                    <i class="icon-basic-eye"></i> 528 Views
+                                    <i class="icon-basic-eye"></i> <?= $this->escapeHtml($postManager->getViewsCountStr($post)); ?>
                                 </span>
                             </div>
                         </div>
                         <div class="group-box">
                             <div class="post-content">
                                 <?= $this->escapeHtml($post->getDescription()); ?>
-                                <div class="post-media recipe-page-media">
-                                    <?php if ($post->getVideoSrc() !== NULL) { ?>
-                                        <img class="alignnone size-full wp-image-9" src="<?= $post->getImage(); ?>"
-                                             alt="1">
-                                    <?php } ?>
-                                </div>
                                 <div class="post-meta">
                                     <span class="post-tag">
-                                        Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>
+                                        Tags: <?= $postManager->convertTagsToLinks($post); ?>
                                     </span>
                                 </div>
                             </div>
@@ -89,55 +83,50 @@ $form->prepare();
                         </div>
                     </div>
                 </article>
-<!--                <div class="k-author-related">-->
-<!--                    <div class="k-author-left">-->
-<!--                        <div class="post-author" data-get-height="related_post" data-break="1199">-->
-<!--                            <h4 class="author-title">-->
-<!--                                <span>About me</span>-->
-<!--                            </h4>-->
-<!--                            <div class="post-author-content">-->
-<!--                                <div class="img">-->
-<!--                                    <img src="http://kratos.wiloke.com/wp-content/uploads/2016/02/1.jpg"-->
-<!--                                         alt="Maria Franklin" style="height: 100%; width: auto; max-width: initial;">-->
-<!--                                </div>-->
-<!--                                <cite>Maria Franklin</cite>-->
-<!--                                <span class="social">-->
-<!--<a target="_blank" href="#"><i class="fa fa-facebook"></i></a>-->
-<!--<a target="_blank" href="#"><i class="fa fa-twitter"></i></a>-->
-<!--<a target="_blank" href="#"><i class="fa fa-dribbble"></i></a>-->
-<!--<a target="_blank" href="#"><i class="fa fa-linkedin"></i></a>-->
-<!--</span>-->
-<!--                                <p>Sed purus eros, porta sed mattis sed, posuere eu elit. Etiam dictum, libero sed-->
-<!--                                    ornare ultrices, nulla dui facilisis orci, ut interdum quam orci congue dui. Vivamus-->
-<!--                                    sagittis volutpat tellus at euismod.</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="post-related" data-set-height="related_post">-->
-<!--                        <h4 class="related-title">-->
-<!--                            <span>Related Posts</span>-->
-<!--                        </h4>-->
-<!--                        <div class="post-related-content">-->
-<!--                            <div class="related-slider">-->
-<!--                                <div class="related-item" style="height: 265px;">-->
-<!--                                    <a href="..\my-portfolio\index.html" class="img">-->
-<!--                                        <img src="--><!--"-->
-<!--                                             class="attachment-kratos-related-posts size-kratos-related-posts wp-post-image"-->
-<!--                                             alt=""> </a>-->
-<!--                                    <div class="caption">-->
-<!--                                        <h2><a href="..\my-portfolio\index.html">My Portfolio</a></h2>-->
-<!--                                        <span class="post-date">-->
-<!--                                            <i class="icon-basic-clock"></i>-->
-<!--                                            <a href="..\my-portfolio\index.html">February 17, 2016 at 10:29 am</a>-->
-<!--                                        </span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                </div>-->
+                <div class="k-author-related">
+                    <div class="k-author-left">
+                        <div class="post-author">
+                            <h4 class="author-title">
+                                <span>Plan a city break</span>
+                            </h4>
+                            <div class="post-author-content">
+                                <div class="img"><img src="/img/airplane.png"></div>
+                                <cite>Cuisine Tourism</cite>
+                                <span>Visit
+                                    <a href="http://maps.google.com/?q=<?= $post->getCity(); ?>, <?= $post->getCuisineCountry(); ?>"
+                                       target="_blank">
+                                        <?= $post->getCity(); ?>, <?= $post->getCuisineCountry(); ?>
+                                    </a>
+                                </span>
+                                <p>
+                                    <br/>
+                                    <span><i class="icon-basic-paperplane"></i>
+                                        Get: <a href="" target="_blank">Flight Tickets</a>
+                                    </span><br/>
+                                    <span><i class="icon-basic-home"></i>
+                                        Make: <a href="" target="_blank">Hotel Reservation</a>
+                                    </span><br/><br/>
+                                    <span><i class="icon-basic-geolocalize-01"></i>
+                                        Location: <a
+                                                href="http://maps.google.com/?q=<?= $post->getRecommendedRestaurant(); ?> <?= $post->getCity(); ?>, <?= $post->getCuisineCountry(); ?>"
+                                                target="_blank"><?= $post->getRecommendedRestaurant(); ?></a>
+                                    </span><br/>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="k-author-left">
+                        <div class="post-author">
+                            <h4 class="author-title">
+                                <span>Recipe Image</span>
+                            </h4>
+                            <div class="recipe-image" style="background-image: url('<?= $post->getImage(); ?>')"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <div class="k-comment">
@@ -184,4 +173,8 @@ $form->prepare();
             </div>
         </div>
     </div>
-<?php echo $this->partial('application/partial/sidebar', ['tagCloud' => $this->tagCloud]); ?>
+<?php echo $this->partial('application/partial/sidebar', [
+    'countries' => $this->countries,
+    'types' => $this->types,
+    'latestPosts' => $this->latestPosts
+]); ?>

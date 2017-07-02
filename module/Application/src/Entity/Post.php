@@ -84,6 +84,11 @@ class Post
     protected $status;
 
     /**
+     * @ORM\Column(name="views")
+     */
+    protected $views;
+
+    /**
      * @ORM\Column(name="date_created")
      */
     protected $dateCreated;
@@ -182,6 +187,24 @@ class Post
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * Returns views.
+     * @return integer
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * Sets status.
+     * @param integer $views
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
     }
 
     /**

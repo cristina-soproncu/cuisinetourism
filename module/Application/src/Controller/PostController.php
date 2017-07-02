@@ -88,13 +88,16 @@ class PostController extends AbstractActionController
         }
 
         // Find the post by ID
-        $post = $this->entityManager->getRepository(Post::class)
-            ->findOneById($postId);
+        $post = $this->entityManager->getRepository(Post::class)->findOneById($postId);
 
         if ($post == null) {
             $this->getResponse()->setStatusCode(404);
             return;
         }
+
+        // Add view
+        $views = $post->getViews() + 1;
+        $this->postManager->updateViews($post, $views);
 
         // Create the form.
         $form = new CommentForm();
@@ -126,12 +129,24 @@ class PostController extends AbstractActionController
         // Get popular tags.
         $tagCloud = $this->postManager->getTagCloud();
 
+        /* Latest 3 posts */
+        $latestPosts = $this->entityManager->getRepository(Post::class)->findLatestPosts(3);
+
+        /* Countries List */
+        $countries = $this->entityManager->getRepository(Post::class)->getCountries();
+
+        /* Cuisine Types list */
+        $types = $this->entityManager->getRepository(Post::class)->getCuisineTypes();
+
         // Render the view template.
         return new ViewModel([
             'post' => $post,
             'form' => $form,
             'postManager' => $this->postManager,
-            'tagCloud' => $tagCloud
+            'tagCloud' => $tagCloud,
+            'countries' => $countries,
+            'types' => $types,
+            'latestPosts' => $latestPosts
         ]);
     }
 
@@ -153,8 +168,7 @@ class PostController extends AbstractActionController
         }
 
         // Find the existing post in the database.
-        $post = $this->entityManager->getRepository(Post::class)
-            ->findOneById($postId);
+        $post = $this->entityManager->getRepository(Post::class)->findOneById($postId);
         if ($post == null) {
             $this->getResponse()->setStatusCode(404);
             return;

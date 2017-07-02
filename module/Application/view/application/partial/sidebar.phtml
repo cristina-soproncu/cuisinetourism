@@ -25,12 +25,14 @@
             </div>
         </div>
 
-        <div id="categories-2" class="widget widget_categories">
-            <h4 class="widget-title">Tags</h4>
+        <div id="countries" class="widget widget_categories">
+            <h4 class="widget-title">Cuisine Type</h4>
             <ul>
-                <?php foreach ($this->tagCloud as $tagName => $frequency): ?>
-                    <li class="cat-item cat-item-10">
-                        <a href="<?= $this->url('application', ['action' => 'index'], ['query' => ['tag' => $tagName]]); ?>"><?= $this->escapeHtml($tagName); ?></a>&nbsp;
+                <?php foreach ($this->types as $types): ?>
+                    <li class="cat-item">
+                        <a href="/recipes/type/<?= $types['cuisineType']; ?>">
+                            <?= $this->escapeHtml($types['cuisineType']); ?>
+                        </a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -39,52 +41,42 @@
         <div id="pi_postslisting-2" class="widget postslisting">
             <h4 class="widget-title">Latest Posts</h4>
             <ul class="widget_random_post">
-                <li>
-                    <a href="why-i-like-grace\index.html" class="img">
-                        <img width="120" height="80" src="/img/uploads/shutterstock_155219990.jpg"
-                             class="attachment-230x80 size-230x80 wp-post-image" alt="">
-                    </a>
-                    <div class="caption">
-                        <h4>
-                            <a href="why-i-like-grace\index.html" data-toggle="tooltip" title="Why I like Grace?">Why I
-                                like Grace?<span><i></i></span></a>
-                        </h4>
-                        <div class="post-meta">
-                            <span><i class="icon-basic-clock"></i>February 22, 2016</span>
-                            <span class="post-views">
-                                <i class="icon-basic-eye"></i>
-                                <a href="why-i-like-grace\index.html">1280 Views</a>
-                            </span>
+                <?php foreach ($this->latestPosts as $post): ?>
+                    <li>
+                        <a href="/recipe/<?= $post->getId(); ?>" class="img">
+                            <img width="120" height="80" src="<?= $post->getImage(); ?>"
+                                 class="wp-post-image" alt="<?= $post->getTitle(); ?>">
+                        </a>
+                        <div class="caption">
+                            <h4>
+                                <a href="/recipe/<?= $post->getId(); ?>" data-toggle="tooltip"
+                                   title="<?= $post->getTitle(); ?>"><?= $post->getTitle(); ?><span><i></i></span>
+                                </a>
+                            </h4>
+                            <div class="post-meta">
+                                <span>
+                                    <i class="icon-basic-clock"></i><?= date('d-F-Y', strtotime($post->getDateCreated())); ?>
+                                </span>
+                                <span class="post-views">
+                                    <i class="icon-basic-eye"></i> <?= $post->getViews(); ?>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
 
-        <div id="pi_banner-2" class="widget widget_banner">
-            <h4 class="widget-title">Banner</h4>
-            <div class="widgetbanner">
-                <a href="http://themeforest.net/user/wiloke" target="_blank">
-                    <img src="/img/uploads/shutterstock_155219990.jpg" alt="Banner">
-                </a>
-            </div>
-        </div>
-
-        <div id="pi_postslisting-3" class="widget postslisting">
-            <h4 class="widget-title">Popular Posts</h4>
-            <ul class="widget_recent_thumbnail">
-                <li>
-                    <a href="work-sets-you-free\index.html" class="img">
-                        <img width="106" height="89" src="/img/uploads/shutterstock_155219990.jpg"
-                             class="attachment-110x89 size-110x89 wp-post-image" alt="">
-                    </a>
-                    <div class="caption">
-                        <h4>
-                            <a href="work-sets-you-free\index.html" data-toggle="tooltip" title="Work sets you free">Work
-                                sets you free</a>
-                        </h4>
-                    </div>
-                </li>
+        <div id="types" class="widget widget_categories">
+            <h4 class="widget-title">Country</h4>
+            <ul>
+                <?php foreach ($this->countries as $country): ?>
+                    <li class="cat-item">
+                        <a href="/recipes/country/<?= $country['cuisineCountry']; ?>">
+                            <?= $this->escapeHtml($country['cuisineCountry']); ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
 

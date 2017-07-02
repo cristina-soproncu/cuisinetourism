@@ -200,7 +200,7 @@ class PostForm extends Form
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
-            'attributes' => [                
+            'attributes' => [
                 'value' => 'Create',
                 'id' => 'submitbutton',
             ],
